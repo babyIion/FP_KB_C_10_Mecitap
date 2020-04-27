@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
-{
+{   
     [SerializeField]
     private int rows = 5;
     [SerializeField] 
@@ -20,7 +20,8 @@ public class GridManager : MonoBehaviour
 
     private void GenerateGrid()
     {
-        GameObject referenceFrame = (GameObject)Instantiate(Resources.Load("frame"));
+        //mengambil asset white (png 1x1 berwarna putih) sebagai 
+        GameObject referenceFrame = (GameObject)Instantiate(Resources.Load("white"));
         for (int row = 0; row < rows; row++)
         {
             for (int col = 0; col < cols; col++)
@@ -34,11 +35,10 @@ public class GridManager : MonoBehaviour
             }
         }
         Destroy(referenceFrame);
+
+        float gridWidth = cols * tileSize;
+        float gridHeight = rows * tileSize;
+        transform.position = new Vector2(-gridWidth / 2 + tileSize / 2, gridHeight / 2 - tileSize / 2);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
