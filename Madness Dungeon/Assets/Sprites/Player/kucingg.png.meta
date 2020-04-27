@@ -1,0 +1,319 @@
+fileFormatVersion: 2
+guid: fc499ce524e6cf544a6ea710bc06ab88
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3804107866480791561
+    second: kucingg_0
+  - first:
+      213: 6561130266135655522
+    second: kucingg_1
+  - first:
+      213: -4855997176740986859
+    second: kucingg_2
+  - first:
+      213: -4756507720117554057
+    second: kucingg_3
+  - first:
+      213: 6194511494935718899
+    second: kucingg_4
+  - first:
+      213: 1675903689140473531
+    second: kucingg_5
+  - first:
+      213: 2090428819463031406
+    second: kucingg_6
+  - first:
+      213: 8836485579708621051
+    second: kucingg_7
+  - first:
+      213: 4529039779037054264
+    second: kucingg_8
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: kucingg_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 230
+        width: 316
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 549829c891909ce49a0f6fb4a968f4e2
+      internalID: -3804107866480791561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kucingg_1
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 322
+        width: 65
+        height: 121
+      alignment: 9
+      pivot: {x: 0.24711116, y: 0.8752038}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed75ccbc2f0c0e341b932225a574e443
+      internalID: 6561130266135655522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kucingg_2
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 286
+        width: 125
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dadc09b9ed8d9b84dbdfb4122f8ed0a6
+      internalID: -4855997176740986859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kucingg_3
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 123
+        width: 148
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c56ddfae41559d94c91fca72f461e47a
+      internalID: -4756507720117554057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kucingg_4
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 204
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f5b94c04eaa83744943953ad5ae1a1b
+      internalID: 6194511494935718899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kucingg_5
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 88
+        width: 84
+        height: 106
+      alignment: 9
+      pivot: {x: 0.50000006, y: 0.8323007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b86be236ccc0e54e8e0b2763c9a1624
+      internalID: 1675903689140473531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kucingg_6
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 9
+        width: 67
+        height: 163
+      alignment: 9
+      pivot: {x: 0.21961133, y: 0.07740927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4266b231689ba6468f092e4d7bd1d58
+      internalID: 2090428819463031406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kucingg_7
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 0
+        width: 89
+        height: 102
+      alignment: 9
+      pivot: {x: 0.42964053, y: 0.8376581}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 784b0e21462f0364ba7fe41faa6f919e
+      internalID: 8836485579708621051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kucingg_8
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 14
+        width: 122
+        height: 68
+      alignment: 9
+      pivot: {x: 0.91704047, y: 0.2928004}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ea8f4d340786b142bf71863d29ee770
+      internalID: 4529039779037054264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
