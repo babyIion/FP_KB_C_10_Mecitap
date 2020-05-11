@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyFollow : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    private float speed = 5f;
 
     private Transform target;
 
