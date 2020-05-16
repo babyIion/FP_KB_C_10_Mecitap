@@ -1,26 +1,35 @@
-﻿using System;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    public bool displayGridGizmos = true;
-    public Transform player;
+
+    public bool displayGridGizmos;
+
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
-    Node[,] grid;
 
+    Node[,] grid;
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
     void Awake()
     {
         nodeDiameter = nodeRadius * 2;
-        gridSizeX = Mathf.RoundToInt (gridWorldSize.x / nodeDiameter);
+        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
+
         CreateGrid();
+    }
+
+    public int MaxSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
+        }
     }
 
     void CreateGrid()
@@ -30,29 +39,32 @@ public class Grid : MonoBehaviour
 
         for (int x = 0; x < gridSizeX; x++)
         {
-            for(int y = 0; y < gridSizeY; y++)
+            for (int y = 0; y < gridSizeY; y++)
             {
                 Vector2 worldPoint = worldBottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+                bool walkable = (Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask) == null); // if no collider2D is returned by overlap circle, then this node is walkable
+
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
         }
     }
 
-    public List<Node> GetNeighbours(Node node)
+
+    public List<Node> GetNeighbours(Node node, int depth = 1)
     {
         List<Node> neighbours = new List<Node>();
 
-        for(int x = -1; x <= 1; x++)
+        for (int x = -depth; x <= depth; x++)
         {
-            for (int y = -1; y <= 1; y++)
+            for (int y = -depth; y <= depth; y++)
             {
-                if (x == 0 && y == 0) continue;
+                if (x == 0 && y == 0)
+                    continue;
 
                 int checkX = node.gridX + x;
                 int checkY = node.gridY + y;
 
-                if(checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
                 {
                     neighbours.Add(grid[checkX, checkY]);
                 }
@@ -61,6 +73,7 @@ public class Grid : MonoBehaviour
 
         return neighbours;
     }
+
 
     public Node NodeFromWorldPoint(Vector2 worldPosition)
     {
@@ -74,31 +87,88 @@ public class Grid : MonoBehaviour
         return grid[x, y];
     }
 
-    public List<Node> path;
+    public Node ClosestWalkableNode(Node node)
+    {
+        int maxRadius = Mathf.Max(gridSizeX, gridSizeY) / 2;
+        for (int i = 1; i < maxRadius; i++)
+        {
+            Node n = FindWalkableInRadius(node.gridX, node.gridY, i);
+            if (n != null)
+            {
+                return n;
 
-    private void OnDrawGizmos()
+            }
+        }
+        return null;
+    }
+    Node FindWalkableInRadius(int centreX, int centreY, int radius)
+    {
+
+        for (int i = -radius; i <= radius; i++)
+        {
+            int verticalSearchX = i + centreX;
+            int horizontalSearchY = i + centreY;
+
+            // top
+            if (InBounds(verticalSearchX, centreY + radius))
+            {
+                if (grid[verticalSearchX, centreY + radius].walkable)
+                {
+                    return grid[verticalSearchX, centreY + radius];
+                }
+            }
+
+            // bottom
+            if (InBounds(verticalSearchX, centreY - radius))
+            {
+                if (grid[verticalSearchX, centreY - radius].walkable)
+                {
+                    return grid[verticalSearchX, centreY - radius];
+                }
+            }
+            // right
+            if (InBounds(centreY + radius, horizontalSearchY))
+            {
+                if (grid[centreX + radius, horizontalSearchY].walkable)
+                {
+                    return grid[centreX + radius, horizontalSearchY];
+                }
+            }
+
+            // left
+            if (InBounds(centreY - radius, horizontalSearchY))
+            {
+                if (grid[centreX - radius, horizontalSearchY].walkable)
+                {
+                    return grid[centreX - radius, horizontalSearchY];
+                }
+            }
+
+        }
+
+        return null;
+
+    }
+
+    bool InBounds(int x, int y)
+    {
+        return x >= 0 && x < gridSizeX && y >= 0 && y < gridSizeY;
+    }
+
+    void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
-
-        if(grid != null && displayGridGizmos)
+        if (grid != null && displayGridGizmos)
         {
-            Node playerNode = NodeFromWorldPoint(player.position);
-            foreach(Node node in grid)
+            foreach (Node n in grid)
             {
-                Gizmos.color = (node.walkable) ? Color.white : Color.red;
-                if(path != null)
-                {
-                    if (path.Contains(node))
-                    {
-                        Gizmos.color = Color.black;
-                    }
-                }
-                if(playerNode == node)
-                {
-                    Gizmos.color = Color.cyan;
-                }
-                Gizmos.DrawCube(node.worldPosition, Vector2.one * (nodeDiameter - .1f));
+                Gizmos.color = Color.red;
+                if (n.walkable)
+                    Gizmos.color = Color.white;
+
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
             }
         }
     }
+
 }

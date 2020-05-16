@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     private Vector2 lastMove;
     public LayerMask WhatStopMovement;
 
+    private float attackTime = .25f;
+    private float attackCounter = .25f;
+    private bool isAttacking;
+
     void Start()
     {
         //rb = GetComponent<Rigidbody2D>();
@@ -23,6 +27,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        
         moving = false;
         //Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         //moveVelocity = moveInput.normalized * speed;
@@ -43,7 +48,7 @@ public class Player : MonoBehaviour
             {
                 transform.Translate(new Vector3(0f, Input.GetAxisRaw("Vertical") * speed * Time.deltaTime, 0f));
                 moving = true;
-                lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
+                lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
             }
             
         }
@@ -53,6 +58,23 @@ public class Player : MonoBehaviour
         anim.SetBool("Moving", moving);
         anim.SetFloat("LastMoveX", lastMove.x);
         anim.SetFloat("LastMoveY", lastMove.y);
+
+        if (isAttacking)
+        {
+            attackCounter -= Time.deltaTime;
+            if(attackCounter <= 0)
+            {
+                anim.SetBool("isAttacking", false);
+                isAttacking = false;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            attackCounter = attackTime;
+            anim.SetBool("isAttacking", true);
+            isAttacking = true;
+        }
     }
 
 }

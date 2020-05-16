@@ -1,65 +1,92 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class Unit : MonoBehaviour
 {
-    public bool displayGridGizmos = false;
+    private Animator myAnim;
     public Transform target;
-    public float speed = 3;
-    Vector3[] path;
+    public float speed = 10;
+
+    [SerializeField]
+    private float maxRange = 0f;
+
+    Vector2[] path;
     int targetIndex;
 
     void Start()
     {
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        myAnim = GetComponent<Animator>();
+        StartCoroutine(RefreshPath());
     }
 
-    public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
+    IEnumerator RefreshPath()
     {
-        if (pathSuccessful)
+        Vector2 targetPositionOld = (Vector2)target.position + Vector2.up; // ensure != to target.position initially
+
+        while (true)
         {
-            path = newPath;
-            targetIndex = 0;
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+            if (targetPositionOld != (Vector2)target.position)
+            {
+                targetPositionOld = (Vector2)target.position;
+
+                if(Vector3.Distance(target.position, transform.position) <= maxRange)
+                {
+                    path = Pathfinding.RequestPath(transform.position, target.position);
+                    StopCoroutine("FollowPath");
+                    StartCoroutine("FollowPath");
+                }
+                else
+                {
+                    myAnim.SetBool("isMoving", false);
+                }
+            }
+
+            yield return new WaitForSeconds(.25f);
         }
     }
 
     IEnumerator FollowPath()
     {
-        Vector3 currentWaypoint = path[0];
-
-        while (true)
+        myAnim.SetBool("isMoving", true);
+        if (path.Length > 0)
         {
-            if (transform.position == currentWaypoint)
+            targetIndex = 0;
+            Vector2 currentWaypoint = path[0];
+
+            while (true)
             {
-                targetIndex++;
-                if (targetIndex >= path.Length)
+                if ((Vector2)transform.position == currentWaypoint)
                 {
-                    yield break;
+                    targetIndex++;
+                    if (targetIndex >= path.Length)
+                    {
+                        yield break;
+                    }
+                    currentWaypoint = path[targetIndex];
                 }
-                currentWaypoint = path[targetIndex];
+                myAnim.SetFloat("MoveX", (target.position.x - transform.position.x));
+                myAnim.SetFloat("MoveY", (target.position.y - transform.position.y));
+
+                transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                yield return null;
+
             }
-            transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-            yield return null;
         }
     }
 
     public void OnDrawGizmos()
     {
-        if (path != null && displayGridGizmos)
+        if (path != null)
         {
             for (int i = targetIndex; i < path.Length; i++)
             {
-                Gizmos.color = Color.white;
-                Gizmos.DrawCube(path[i], Vector3.one);
+                Gizmos.color = Color.black;
+                //Gizmos.DrawCube((Vector3)path[i], Vector3.one *.5f);
 
                 if (i == targetIndex)
                 {
                     Gizmos.DrawLine(transform.position, path[i]);
                 }
-
                 else
                 {
                     Gizmos.DrawLine(path[i - 1], path[i]);
